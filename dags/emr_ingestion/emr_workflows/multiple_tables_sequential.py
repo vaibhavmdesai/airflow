@@ -1,7 +1,6 @@
 from airflow import DAG
 from airflow.providers.amazon.aws.transfers.sql_to_s3 import SqlToS3Operator
 from airflow.operators.python import PythonOperator
-from airflow.providers.postgres.operators.postgres import PostgresOperator
 from datetime import datetime
 from airflow.models import Variable
 from emr_ingestion.businesscode.code.constants import *
