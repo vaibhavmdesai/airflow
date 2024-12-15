@@ -4,8 +4,8 @@ from airflow.operators.python import PythonOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from datetime import datetime
 from airflow.models import Variable
-from businesscode.code.constants import *
-from businesscode.code.s3_operations import *
+from emr_ingestion.businesscode.code.constants import *
+from emr_ingestion.businesscode.code.s3_operations import *
 
 
 aws_access_key = Variable.get('AWS_ACCESS_KEY')
