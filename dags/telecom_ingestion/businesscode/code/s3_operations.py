@@ -1,7 +1,7 @@
 import boto3
 from botocore.exceptions import NoCredentialsError, ClientError
 from airflow.providers.postgres.hooks.postgres import PostgresHook
-from emr_ingestion.businesscode.code.constants import *
+from telecom_ingestion.businesscode.code.constants import *
 
 def file_exists_in_s3(s3_client, bucket_name, file_name):
     
@@ -71,7 +71,7 @@ def get_max_loaddate(table_name, data_source):
 
     postgres_hook = PostgresHook(postgres_conn_id=postgres_conn_id)
     sql = f"""SELECT COALESCE(CAST(MAX(loaddate) AS DATE), '1900-01-01')
-             FROM load_logs
+             FROM audit_logs
              WHERE tablename = '{table_name}'
              AND data_source = '{data_source}'
           """
@@ -92,9 +92,10 @@ def get_row_count(count_query):
     return row_count
 
 
-def insert_into_postgres(ti, data_source, tablename, watermarkcolumnname = 'temp_col', loaddate = datetime.now()):
+def insert_into_postgres(ti, data_source, tablename, watermarkcolumnname, loaddate = datetime.now()):
 
-    result = ti.xcom_pull(task_ids=[f'count_rows_{tablename}_{data_source}'])
+    result = ti.xcom_pull(task_ids=[f'count_rows_{data_source}_{tablename}'])
+    print("RESULT: ", result)
     numberofrowscopied = result[0]
 
     postgres_hook = PostgresHook(postgres_conn_id=postgres_conn_id)
@@ -104,7 +105,7 @@ def insert_into_postgres(ti, data_source, tablename, watermarkcolumnname = 'temp
     ]
     
     postgres_hook.insert_rows(
-        table='load_logs', 
+        table='audit_logs', 
         rows=data_to_insert, 
         target_fields=['data_source', 'tablename', 'numberofrowscopied', 'watermarkcolumnname', 'loaddate'], 
         commit_every=1000

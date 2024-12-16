@@ -1,10 +1,10 @@
 from datetime import datetime
 import csv
 
-postgres_conn_id = 'my_postgres_connection' 
+postgres_conn_id = 'telecom_postgres' 
 aws_conn_id='aws_default'
 s3_bucket = 'oabronze'
-config_path = '/home/vd/data-engineering/airflow/airflowenv/airflow-emr-ingestion/dags/emr_ingestion/businesscode/configs/config.csv'
+config_path = '/home/vd/data-engineering/projects/Telecom/configs/config.csv'
 archive_date = datetime.today().strftime('%Y/%m/%d')
 archive_suffix = datetime.today().strftime('%Y%m%d%H%M%S')
 
