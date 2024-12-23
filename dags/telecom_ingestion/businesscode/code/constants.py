@@ -10,4 +10,4 @@ archive_suffix = datetime.today().strftime('%Y%m%d%H%M%S')
 
 with open(config_path, newline='') as csvfile:
     csvreader = csv.DictReader(csvfile)
-    table_list = [row for row in csvreader]
+    table_list = [row for row in csvreader if row['is_active'] == 'Y']
