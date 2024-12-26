@@ -11,7 +11,7 @@ aws_access_key = Variable.get('AWS_ACCESS_KEY')
 aws_secret_access_key = Variable.get('AWS_SECRET_ACCESS_KEY')
 
 dag = DAG(
-    'Telecom_Ingestion',
+    'Telecom_PostgreSql_Ingestion',
     description='Load PostgreSQL table to S3 in Parquet format using SqlToS3Operator',
     schedule='@daily',
     start_date=datetime(2024, 12, 9),
