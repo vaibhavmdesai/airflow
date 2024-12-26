@@ -1,7 +1,7 @@
 import boto3
 from botocore.exceptions import NoCredentialsError, ClientError
 from airflow.providers.postgres.hooks.postgres import PostgresHook
-from ingestion.businesscode.constants import *
+from postgresql_to_bronze.businesscode.constants import *
 
 def file_exists_in_s3(s3_client, bucket_name, file_name):
     
