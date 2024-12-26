@@ -3,8 +3,8 @@ from airflow.providers.amazon.aws.transfers.sql_to_s3 import SqlToS3Operator
 from airflow.operators.python import PythonOperator
 from datetime import datetime
 from airflow.models import Variable
-from telecom_ingestion.businesscode.code.constants import *
-from telecom_ingestion.businesscode.code.s3_operations import *
+from ingestion.businesscode.constants import *
+from ingestion.businesscode.s3_operations import *
 
 
 aws_access_key = Variable.get('AWS_ACCESS_KEY')

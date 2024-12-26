@@ -1,5 +1,0 @@
-table_name,load_type,target_path
-providers,full,hospa
-patients,incremental,hospa
-providers,full,hospb
-patients,incremental,hospb
