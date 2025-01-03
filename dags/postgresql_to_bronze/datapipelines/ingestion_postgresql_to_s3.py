@@ -33,7 +33,7 @@ for table_config in table_list:
         sql_query = f"SELECT *, '{data_source}' as data_source FROM {table}"
         count_query = f"SELECT count(*) FROM {table}"
     else:
-        sql_query = f"SELECT *, '{data_source}' as data_source FROM {table} where {watermark_column} = '{load_date}'" 
+        sql_query = f"SELECT *, '{data_source}' as data_source FROM {table} where {watermark_column} >= '{load_date}'" 
         count_query = f"SELECT count(*) FROM {table} where {watermark_column} >= '{load_date}'"
 
 
@@ -86,4 +86,5 @@ for table_config in table_list:
         dag=dag
     )
 
-    archive_if_file_exists >> extract_to_s3_task >> get_table_count >> load_audit_data
+    # archive_if_file_exists >> extract_to_s3_task >> get_table_count >> load_audit_data
+    extract_to_s3_task

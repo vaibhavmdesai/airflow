@@ -39,7 +39,8 @@ def copy_and_delete_file_in_s3(aws_access_key, aws_secret_access_key, bucket_nam
     s3_client = boto3.client(
         's3',
         aws_access_key_id=aws_access_key,
-        aws_secret_access_key=aws_secret_access_key
+        aws_secret_access_key=aws_secret_access_key,
+        endpoint_url=f'http://172.17.0.1:9000'
     )
 
     # Check if the source file exists
